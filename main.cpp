@@ -8,8 +8,8 @@ using namespace std;
 int SZ_CODES = 20000, START_AMOUNT = 10; bool debug = true;
 
 void addNode(string[], IntBinaryTree&);
-void deleteString(string, IntBinaryTree&);
-void searchString(string, IntBinaryTree&);
+void deleteString(IntBinaryTree&);
+void searchString(IntBinaryTree&);
 
 int main() {
     srand(time(0));
@@ -70,9 +70,28 @@ int main() {
     return 0;
 }
 
+
 void addNode(string randS[], IntBinaryTree& ST){
     string tempString;
 
     tempString = randS[rand()% SZ_CODES];
     ST.insertNode(tempString);
+}
+
+
+void deleteString(IntBinaryTree& ST){
+
+    string target;
+
+    
+        cout << "What string would you like to delete?: ";
+    
+        getline(cin, target);
+
+        if(ST.searchNode(target)){
+            ST.remove(target);
+        }
+        else{
+            cout << target << " was not found in the Tree.\n";
+        }
 }
