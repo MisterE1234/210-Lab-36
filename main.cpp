@@ -13,11 +13,17 @@ void addNode(string[], IntBinaryTree&);
 int main() {
     string tempString;
     string randString[SZ_CODES];
-    IntBinaryTree stringTree();
+    IntBinaryTree stringTree;
 
     //opening the codes for the array
     ifstream iFile("codes.txt");
+    if(!iFile){
+        cout << "file failed to open\n";
+    }
 
+    if(debug){
+        cout << "file opens!\n";
+    }
     //using a for loop to read the file to the array:
     for(int i = 0; i < SZ_CODES; i++){
 
@@ -26,6 +32,10 @@ int main() {
     }
 
     iFile.close();
+
+    if(debug){
+        cout << "file closes!\n";
+    }
 
     if(debug){
         for(int i = 0; i < 10; i++){
