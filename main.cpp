@@ -2,11 +2,10 @@
 
 #include <iostream>
 #include <fstream>
-#include <array>
 #include "IntBinaryTree.h"
 using namespace std;
 
-int SZ_CODES = 20000; bool debug = true;
+int SZ_CODES = 20000, START_AMOUNT = 10; bool debug = true;
 
 void addNode(string[], IntBinaryTree&);
 
@@ -39,13 +38,32 @@ int main() {
     }
 
     if(debug){
-        for(int i = 0; i < 10; i++){
+        for(int i = 0; i < START_AMOUNT; i++){
             cout << randString[i] << endl;
         }
     }
 
-    stringTree.~IntBinaryTree();
+    //Adding some basic codes to the tree:
+    for(int i = 0; i < START_AMOUNT; i++){
+        addNode(randString, stringTree);
+    }
 
+    
+    //displaying the codes in the tree:
+    cout << "Initial Codes in the Tree in order:\n";
+    stringTree.displayInOrder();
+
+    cout << "Initial Codes in the Tree in Postorder:\n";
+    stringTree.displayPostOrder();
+
+    cout << "Initial Codes in the Tree in Preorder:\n";
+    stringTree.displayPreOrder();
+
+
+
+
+    //deleting the stringTree at the end of program:
+    stringTree.~IntBinaryTree();
 
     return 0;
 }
