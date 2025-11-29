@@ -10,6 +10,8 @@ int SZ_CODES = 20000, START_AMOUNT = 10; bool debug = true;
 void addNode(string[], IntBinaryTree&);
 void deleteString(IntBinaryTree&);
 void searchString(IntBinaryTree&);
+void modifyString(IntBinaryTree&);
+int menu();
 
 int main() {
     srand(time(0));
@@ -124,4 +126,25 @@ void searchString (IntBinaryTree& ST){
         cout << target << " was not found in the Tree.\n";
     }
     cout << endl;
+}
+
+
+void modifyString(IntBinaryTree& ST){
+    string target;
+    //asking the user what they would like deleted:
+    cout << "What string would you like to modify?: ";
+    
+    getline(cin, target);
+    //if the target is in the tree:
+    if(ST.searchNode(target)){
+        
+        
+        
+        ST.remove(target); // delete the node from the tree
+    }
+    else{//if the node is not in the tree:
+        cout << target << " was not found in the Tree.\n";
+    }
+    cout << endl;
+
 }
