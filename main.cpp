@@ -5,8 +5,10 @@
 #include "IntBinaryTree.h"
 using namespace std;
 
-int SZ_CODES = 20000, START_AMOUNT = 10; bool debug = true;
+//universal variables:
+int SZ_CODES = 20000, START_AMOUNT = 10; bool debug = false;
 
+//The function Prototypes
 void addNode(string[], IntBinaryTree&);
 void deleteString(IntBinaryTree&);
 void searchString(IntBinaryTree&);
@@ -14,16 +16,18 @@ void modifyString(IntBinaryTree&);
 int menu();
 
 int main() {
+    //seeding the randomizer to be true random:
     srand(time(0));
 
-    string randString[SZ_CODES];
-    IntBinaryTree stringTree;
-    bool exit = false;
+    string randString[SZ_CODES];  //declaing a string array to carry the codes
+    IntBinaryTree stringTree; //declaring the BST
+    bool exit = false; //declaring a bool to control if the menu should be exited from
 
     //opening the codes for the array
     ifstream iFile("codes.txt");
-    if(!iFile){
+    if(!iFile){ //checking to see if the file opened:
         cout << "file failed to open\n";
+        return -1;
     }
 
     if(debug){
@@ -36,6 +40,7 @@ int main() {
 
     }
 
+    //closing the file
     iFile.close();
 
     if(debug){
@@ -61,26 +66,26 @@ int main() {
     //Using a switch and a while loop to act as the menu:
     while(!exit){
         switch(menu()){
-            case 0:
+            case 0: //Exiting program:
                 cout << "Exiting Program...";
                 exit = true;
                 break;
-            case 1:
+            case 1: //Display the BST
                 stringTree.displayInOrder();
                 break;
-            case 2:
+            case 2: // Add a new Node to BST
                 addNode(randString, stringTree);
                 break;
-            case 3:
+            case 3: // delete a node form the BST
                 deleteString(stringTree);
                 break;
-            case 4:
+            case 4:// determine if a string is in the BST
                 searchString(stringTree);
                 break;
-            case 5:
+            case 5: // modiify a string in the BST:
                 modifyString(stringTree);
                 break;
-            default:
+            default: // error contegency
                 cout << "Error: no case number\n";
 
         }
@@ -182,24 +187,25 @@ int menu(){
     << "[5] Modify Node\n"
     << "[0] End Program\n";
 
+    //using a while loop to validate the user's response:
     while(!valid){
         cout << "Which would you like (0-5)?: ";
         cin >> choice;
 
-        if(cin.fail()){
+        if(cin.fail()){ //if not an integer:
             cin.clear();
             cin.ignore(10000,'\n');
             cout << "Invalid Entry. Not an Integer. Try again\n";
         }
-        else if(choice > 5 || choice < 0){
+        else if(choice > 5 || choice < 0){ // if not an option in the menu:
             cout << "Invalid Entry. Not within range. Try again\n";
         }
-        else{
+        else{// if correct:
             valid = true;
         }
 
     }
-
+    //using cin.ignore so that any future getlines are not messed up.
     cin.ignore(10000,'\n');
 
 
