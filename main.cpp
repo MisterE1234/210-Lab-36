@@ -8,6 +8,8 @@ using namespace std;
 int SZ_CODES = 20000, START_AMOUNT = 10; bool debug = true;
 
 void addNode(string[], IntBinaryTree&);
+void deleteString(string, IntBinaryTree&);
+void searchString(string, IntBinaryTree&);
 
 int main() {
     srand(time(0));
