@@ -18,6 +18,7 @@ int main() {
 
     string randString[SZ_CODES];
     IntBinaryTree stringTree;
+    bool exit = false;
 
     //opening the codes for the array
     ifstream iFile("codes.txt");
@@ -52,27 +53,38 @@ int main() {
         addNode(randString, stringTree);
     }
 
-    
+
     //displaying the codes in the tree:
     cout << "Initial Codes in the Tree in order:\n";
     stringTree.displayInOrder();
 
-    cout << "Initial Codes in the Tree in Postorder:\n";
-    stringTree.displayPostOrder();
+    //Using a switch and a while loop to act as the menu:
+    while(!exit){
+        switch(menu()){
+            case 0:
+                cout << "Exiting Program...";
+                exit = true;
+                break;
+            case 1:
+                stringTree.displayInOrder();
+                break;
+            case 2:
+                addNode(randString, stringTree);
+                break;
+            case 3:
+                deleteString(stringTree);
+                break;
+            case 4:
+                searchString(stringTree);
+                break;
+            case 5:
+                modifyString(stringTree);
+                break;
+            default:
+                cout << "Error: no case number\n";
 
-    cout << "Initial Codes in the Tree in Preorder:\n";
-    stringTree.displayPreOrder();
-
-
-    deleteString(stringTree);
-
-    cout << "Initial Codes in the Tree in order:\n";
-    stringTree.displayInOrder();
-
-    searchString(stringTree);
-
-
-
+        }
+    }
 
     //deleting the stringTree at the end of program:
     stringTree.~IntBinaryTree();
@@ -155,6 +167,9 @@ void modifyString(IntBinaryTree& ST){
 
 }
 
+//menu() displays the menu for the program. It will also prompt the user to choose.
+//requires: nothing
+//returns: an int value
 int menu(){
     int choice = 0;
     bool valid = false;
@@ -172,13 +187,20 @@ int menu(){
         cin >> choice;
 
         if(cin.fail()){
+            cin.clear();
+            cin.ignore(10000,'\n');
             cout << "Invalid Entry. Not an Integer. Try again\n";
         }
         else if(choice > 5 || choice < 0){
-            cout << 
+            cout << "Invalid Entry. Not within range. Try again\n";
+        }
+        else{
+            valid = true;
         }
 
     }
+
+    cin.ignore(10000,'\n');
 
 
     return choice;
