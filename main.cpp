@@ -62,6 +62,14 @@ int main() {
     stringTree.displayPreOrder();
 
 
+    deleteString(stringTree);
+
+    cout << "Initial Codes in the Tree in order:\n";
+    stringTree.displayInOrder();
+
+    searchString(stringTree);
+
+
 
 
     //deleting the stringTree at the end of program:
@@ -70,28 +78,50 @@ int main() {
     return 0;
 }
 
-
+//addNode() will add a new node to BST with a random string
+//requires: a IntBinaryTree passed by reference and an array of strings
+//returns: nothing
 void addNode(string randS[], IntBinaryTree& ST){
     string tempString;
-
+    //using a random number between 0 and SZ_CODES(20000) to get a random code as the string
     tempString = randS[rand()% SZ_CODES];
     ST.insertNode(tempString);
 }
 
-
+//deleteString() will search for a string in the string and delete it if found:
+//requires: a IntBinaryTree passed by reference
+//returns: nothing
 void deleteString(IntBinaryTree& ST){
-
     string target;
-
+    //asking the user what they would like deleted:
+    cout << "What string would you like to delete?: ";
     
-        cout << "What string would you like to delete?: ";
-    
-        getline(cin, target);
+    getline(cin, target);
+    //if the target is in the tree:
+    if(ST.searchNode(target)){
+        ST.remove(target); // delete the node from the tree
+    }
+    else{//if the node is not in the tree:
+        cout << target << " was not found in the Tree.\n";
+    }
+    cout << endl;
+}
 
-        if(ST.searchNode(target)){
-            ST.remove(target);
-        }
-        else{
-            cout << target << " was not found in the Tree.\n";
-        }
+//searchString() will search for a string in the string and say if it is found:
+//requires: a IntBinaryTree passed by reference
+//returns: nothing
+void searchString (IntBinaryTree& ST){
+    string target;
+    //asking the user what they would like to search for:
+    cout << "What string would you like to search for?: ";
+    
+    getline(cin, target);
+    //if the target is in the tree:
+    if(ST.searchNode(target)){
+        cout << target << " is inside the Tree.\n";
+    }
+    else{//if the node is not in the tree:
+        cout << target << " was not found in the Tree.\n";
+    }
+    cout << endl;
 }
