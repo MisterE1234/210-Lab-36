@@ -11,7 +11,8 @@ int SZ_CODES = 20000; bool debug = true;
 void addNode(string[], IntBinaryTree&);
 
 int main() {
-    string tempString;
+    srand(time(0));
+
     string randString[SZ_CODES];
     IntBinaryTree stringTree;
 
@@ -43,6 +44,15 @@ int main() {
         }
     }
 
+    stringTree.~IntBinaryTree();
+
 
     return 0;
+}
+
+void addNode(string randS[], IntBinaryTree& ST){
+    string tempString;
+
+    tempString = randS[rand()% SZ_CODES];
+    ST.insertNode(tempString);
 }
