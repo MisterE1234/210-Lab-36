@@ -90,7 +90,7 @@ void addNode(string randS[], IntBinaryTree& ST){
     ST.insertNode(tempString);
 }
 
-//deleteString() will search for a string in the string and delete it if found:
+//deleteString() will search for a string in the tree and delete it if found:
 //requires: a IntBinaryTree passed by reference
 //returns: nothing
 void deleteString(IntBinaryTree& ST){
@@ -109,7 +109,7 @@ void deleteString(IntBinaryTree& ST){
     cout << endl;
 }
 
-//searchString() will search for a string in the string and say if it is found:
+//searchString() will search for a string in the tree and say if it is found:
 //requires: a IntBinaryTree passed by reference
 //returns: nothing
 void searchString (IntBinaryTree& ST){
@@ -128,9 +128,12 @@ void searchString (IntBinaryTree& ST){
     cout << endl;
 }
 
-
+//modifyString() will search for a string in the stree and ask the user what would they like instead:
+//requires: a IntBinaryTree passed by reference
+//returns: nothing
 void modifyString(IntBinaryTree& ST){
     string target;
+    string newValue;
     //asking the user what they would like deleted:
     cout << "What string would you like to modify?: ";
     
@@ -138,13 +141,45 @@ void modifyString(IntBinaryTree& ST){
     //if the target is in the tree:
     if(ST.searchNode(target)){
         
+        cout << "What would you like to change it to?: ";
         
+        getline(cin, newValue);
         
         ST.remove(target); // delete the node from the tree
+        ST.insertNode(newValue);//adding the new node into the tree
     }
     else{//if the node is not in the tree:
         cout << target << " was not found in the Tree.\n";
     }
     cout << endl;
 
+}
+
+int menu(){
+    int choice = 0;
+    bool valid = false;
+
+    cout << "BST Menu: \n"
+    << "[1] Display Tree\n"
+    << "[2] Add New Node\n"
+    << "[3] Delete Node\n"
+    << "[4] Search For Node\n"
+    << "[5] Modify Node\n"
+    << "[0] End Program\n";
+
+    while(!valid){
+        cout << "Which would you like (0-5)?: ";
+        cin >> choice;
+
+        if(cin.fail()){
+            cout << "Invalid Entry. Not an Integer. Try again\n";
+        }
+        else if(choice > 5 || choice < 0){
+            cout << 
+        }
+
+    }
+
+
+    return choice;
 }
